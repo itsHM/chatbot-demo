@@ -1,0 +1,34 @@
+<!-- chatbot.component.html -->
+<div class="chat-container">
+    <div class="chat-header">
+      <h2>Virtual Assistant</h2>
+    </div>
+    
+    <div class="chat-messages" #scrollMe>
+      <div *ngFor="let message of messages" 
+           class="message" 
+           [ngClass]="{'bot': message.isBot, 'user': !message.isBot}"
+           [@fadeIn]>
+        <div class="message-content">
+          {{ message.text }}
+          <div *ngIf="message.isTyping" class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+      
+      <div *ngIf="isLoading" class="loader-container">
+        <div class="loader"></div>
+      </div>
+    </div>
+    
+    <div class="quick-questions">
+      <button *ngFor="let question of predefinedQuestions; let i = index"
+              (click)="handleQuestionClick(i)"
+              class="question-button">
+        {{ question }}
+      </button>
+    </div>
+  </div>
